@@ -3,6 +3,8 @@ import requests
 import datetime
 import os
 import json
+from html.parser import HTMLParser
+
 
 bp = Blueprint("all", __name__)
 
@@ -10,7 +12,7 @@ bp = Blueprint("all", __name__)
 def index():
   with open('example.json') as json_file:
     jobs = json.load(json_file)
-  # github_jobs = requests.get("https://jobs.github.com/positions.json?lat=37.3229978&long=-122.0321823")
+  # github_jobs = requests.get("https://jobs.github.com/positions.json")
   # jobs = json.loads(github_jobs.text)
   print(len(jobs))
   return render_template('home.html', jobs=jobs)  

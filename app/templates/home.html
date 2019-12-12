@@ -2,45 +2,86 @@
 
 {% block body %}
 <div>
-  <h1>Adam's Job Board</h1>
+  <h1>Adam Windsor - Job Board</h1>
 </div>
-<div class="pure-g">
-  <div class="pure-u-1-5">
+<div class="container">
+  <div class="row">
+    {% for job in jobs %}
+    <div class="col-12 d-flex justify-content-center ">
+      <div class="card w-75" style="margin: 15px;">
+        <div class="card-body">
+          <h5 class="card-title">{{job.title}} - {{job.company}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{job.location}}</h6>
+          <p class="card-text">Posted: {{job.created_at}}</p>
 
-  </div>
-  <div class="pure-u-3-5">
-
-    <table class="pure-table pure-table-striped">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Site</th>
-          <th>Job Description</th>
-          <th>Location</th>
-          <th>Company Logo</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for job in jobs %}
-        <tr>
-          <td> {{ job.title}} </td>
-          <td> <a href="{{ job.url }}">{{ job.url }}</a>  </td>
-          <td> {{ job.description }} </td>
-          <td>{{ job.location }}</td>
-          <td>{{ job.company_logo }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-
-  </div>
-  <div class="pure-u-1-5">
-
+          <a href="{{job.url}}">
+            <button type="button" class="btn btn-primary">
+              Apply
+            </button>
+          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            data-job-title="{{job.title}}" data-job-description="{{job.description }}"
+            data-logo="{{job.company_logo}}" data-company-name="{{job.company}}"
+            data-location="{{job.location}}" data-apply-now="{{job.how_to_apply}}">More Info
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 
+<div class="container">
+  <div class="row">
+      <div class="col-12 d-flex justify-content-center ">
+          <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              </ul>
+            </nav>
+        </div>
+  </div>
+   
+</div>
+
+<!-- Button trigger modal -->
 
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="container" style="margin: 10px;">
+        <div class="row">
+          <img class="company-logo mx-auto d-block" src="" alt="" style="max-width: 500px;">
+        </div>
+        <div class="row">
+          <div class="modal-body ">
+            <div class="description text-left">
+
+            </div>
+            <div id="apply-now" class="text-left"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
